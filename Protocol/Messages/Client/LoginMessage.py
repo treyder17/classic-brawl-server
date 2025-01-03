@@ -27,6 +27,7 @@ class LoginMessage(Reader):
 
 
     def process(self, db):
+        if self.player.status == 3: return
 
         if self.player.maintenance:
             self.player.err_code = 10
