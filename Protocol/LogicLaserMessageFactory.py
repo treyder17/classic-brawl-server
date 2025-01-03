@@ -22,6 +22,7 @@ from Protocol.Messages.Client.AskForJoinableAlliancesListMessage import AskForJo
 from Protocol.Messages.Client.LeaveAllianceMessage import LeaveAllianceMessage
 from Protocol.Messages.Client.SearchAlliancesMessage import SearchAlliancesMessage
 from Protocol.Messages.Client.ChatToAllianceStreamMessage import ChatToAllianceStreamMessage
+from Protocol.Messages.Client.PlayerStatusMessage import PlayerStatusMessage
 
 packets = {
     10101: LoginMessage,
@@ -48,5 +49,5 @@ packets = {
     14403: GetLeaderboardMessage,
     14600: AvatarNameCheckRequestMessage,
     18686: SetSupportedCreatorMessage,
-
+    14366: PlayerStatusMessage
 }
