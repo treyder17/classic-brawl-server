@@ -27,6 +27,8 @@ class AskForBattleEndMessage(Reader):
 
 
     def process(self, db):
+        if self.player.status != 8: return
+
         if self.rank != 0:
             if self.players[0]['Team'] == self.players[1]['Team']:
                 self.type = 5
@@ -36,7 +38,3 @@ class AskForBattleEndMessage(Reader):
             self.type = 0
 
         BattleEndMessage(self.client, self.player, self.type, self.result, self.players).send()
-
-
-
-

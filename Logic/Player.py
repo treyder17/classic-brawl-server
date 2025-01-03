@@ -56,6 +56,7 @@ class Player:
     patch_sha = Fingerprint.loadFinger("GameAssets/fingerprint.json")
     update_url = settings['UpdateURL']
     clubWarsEnabled = settings["ClubWarsEnabled"] # Inefficient but the easiest i can do right now
+    status: int = 0
 
     delivery_items = {}
     box_rewards = {}

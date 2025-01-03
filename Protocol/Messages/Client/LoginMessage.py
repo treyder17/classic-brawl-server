@@ -30,11 +30,13 @@ class LoginMessage(Reader):
 
         if self.player.maintenance:
             self.player.err_code = 10
-            LoginFailedMessage(self.client, self.player, '').send()
+            LoginFailedMessage(self.client, self.player, None).send()
+            return
 
         if self.fingerprint_sha != self.player.patch_sha and self.player.patch:
             self.player.err_code = 7
-            LoginFailedMessage(self.client, self.player, "").send()
+            LoginFailedMessage(self.client, self.player, None).send()
+            return
 
         if self.account_id == 0:
             self.player.ID    = self.helpers.randomID()
@@ -54,8 +56,9 @@ class LoginMessage(Reader):
             else:
                 self.player.err_code = 1
                 LoginFailedMessage(self.client, self.player, "Account not found in database!\nPlease clear app data.").send()
+                return
 
-
+        self.player.status = 3
         LoginOkMessage(self.client, self.player, self.player.ID, self.player.token).send()
         OwnHomeDataMessage(self.client, self.player).send()
 
