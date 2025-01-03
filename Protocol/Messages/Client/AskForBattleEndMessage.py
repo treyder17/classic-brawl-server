@@ -28,6 +28,7 @@ class AskForBattleEndMessage(Reader):
 
     def process(self, db):
         if self.player.status != 8: return
+        if self.count not in [3, 6, 10]: return
 
         if self.rank != 0:
             if self.players[0]['Team'] == self.players[1]['Team']:
