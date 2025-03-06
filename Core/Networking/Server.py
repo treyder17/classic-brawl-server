@@ -17,6 +17,7 @@ class Server:
         self.config = json.loads(open('config.json', 'r').read())
         self.db = MongoDB(self.config['MongoConnectionURL'])
         self.server = socket.socket()
+        self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # You can start server with the same address
         self.port = port
         self.ip = ip
 
