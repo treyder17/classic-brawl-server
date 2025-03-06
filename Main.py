@@ -15,7 +15,7 @@ class Main:
     def main(self):
         if self.useUpdater: self.updater = Updater()  # Execute deadly weapons
 
-        if not self.updater.updateInstalled and self.crashCount >= 2:
+        if self.useUpdater and not self.updater.updateInstalled and self.crashCount >= 2:
             print("No fixes are available for the crashes. Shutting down server...")
             exit()
 

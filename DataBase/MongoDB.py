@@ -15,8 +15,8 @@ class MongoDB:
         try:
             print(f"{Helpers.cyan}[DEBUG] Connecting to Mongo DataBase...")
             self.client.server_info()
-        except Exception:
-            print(f"{Helpers.red}[ERROR] Unable to connect to Mongo server!")
+        except Exception as e:
+            print(f"{Helpers.red}[ERROR] Unable to connect to Mongo server! Error: {e}")
             sys.exit()
 
         self.database = self.client['Classic-Brawl']

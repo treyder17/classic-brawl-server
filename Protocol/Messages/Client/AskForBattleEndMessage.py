@@ -6,7 +6,7 @@ class AskForBattleEndMessage(Reader):
         super().__init__(initial_bytes)
         self.player = player
         self.client = client
-        self.players = {}
+        self.players: list = []
 
     def decode(self):
         self.result   = self.readVInt()
@@ -17,13 +17,7 @@ class AskForBattleEndMessage(Reader):
         self.count    = self.readVInt()
 
         for player in range(self.count):
-            self.brawler     = self.readDataReference()
-            self.skin        = self.readDataReference()
-            self.team        = self.readVInt()
-            self.unk         = self.readVInt()
-            self.username    = self.readString()
-
-            self.players[player] = {f'Name': self.username, 'Team': self.team, 'Brawler': self.brawler[1], 'Skin': self.skin[1]}
+            self.players.append({'id': self.readDataReference(), 'skin': self.readDataReference(), 'team': self.readVInt(), 'isPlayer': self.readVInt(), 'name': self.readString()})
 
 
     def process(self, db):
@@ -31,7 +25,7 @@ class AskForBattleEndMessage(Reader):
         if self.count not in [3, 6, 10]: return
 
         if self.rank != 0:
-            if self.players[0]['Team'] == self.players[1]['Team']:
+            if self.players[0]['team'] == self.players[1]['team']:
                 self.type = 5
             else:
                 self.type = 2
