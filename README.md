@@ -28,5 +28,5 @@ Join us on [Discord](https://discord.gg/9rQPMTfJgt)
 ### Credits
 - [athemm](https://github.com/athemm) - for making the patcher.
 - [PhoenixFire](https://github.com/PhoenixFire6934) - the creator of Classic Brawl
-- [CrazorTheCat](https://github.com/CrazorTheCat) - Contributor and other versions creator
-- [8-bitHacc](https://github.com/8-bitHacc) - Contributor
+- [CrazorTheCat](https://github.com/CrazorTheCat) - Contributor and other versions developer
+- [8-bitHacc](https://github.com/8-bitHacc) - Contributor & Developer of new features
