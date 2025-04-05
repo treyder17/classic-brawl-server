@@ -1,5 +1,5 @@
+import zlib
 from Utils.Helpers import Helpers
-import traceback
 
 class Writer:
     def __init__(self, client, endian: str = 'big'):
@@ -40,6 +40,15 @@ class Writer:
         else:
             self.writeUInt8(0)
 
+    def writeBooleanTest(self, *args):
+        boolean: int = 0
+        i: int = 0
+        for value in args:
+            if value:
+                boolean |= 1 << i
+            i += 1
+        self.writeByte(boolean)
+
     def writeHexa(self, data):
         if data:
             if data.startswith('0x'):
@@ -77,6 +86,8 @@ class Writer:
         final = b''
         if data == 0:
             self.writeByte(0)
+        elif data < 0:
+            self.writeVInt((2147483648 * 2) + data) # by isaasoobarr
         else:
             data = (data << 1) ^ (data >> 31)
             while data:
@@ -111,6 +122,12 @@ class Writer:
             encoded = string.encode('utf-8')
             self.writeInt(len(encoded))
             self.buffer += encoded
+
+    def writeCompressedString(self, string: str):
+        compressed: bytes = zlib.compress(string.encode("utf-8"))
+        self.writeInt(len(compressed) + 4)
+        self.buffer += len(string).to_bytes(4, "little") # little endian
+        self.buffer += compressed
 
     def writeStringShort(self, string: str = None):
         if string is None:

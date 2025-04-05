@@ -31,10 +31,14 @@ class MongoUtils:
 
         return doc_list
 
-    def load_all_documents_sorted(self, collection, args, element):
+    def load_all_documents_sorted(self, collection, args, element, element2):
         doc_list = []
-        cursor = collection.find(args).sort(element)
-        for document in cursor:
-            doc_list.append(document)
+
+        for document in collection.find(args).sort(element):
+            del document["_id"]
+
+            if element2 is not None:
+                if document.get(element2, 0) != 0: doc_list.append(document)
+            else: doc_list.append(document)
 
         return doc_list

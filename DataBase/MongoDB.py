@@ -132,10 +132,8 @@ class MongoDB:
         return result
 
 
-    def load_all_players_sorted(self, args, element):
-        result = self.mongo_utils.load_all_documents_sorted(self.players, args, element)
-
-        return result
+    def load_all_players_sorted(self, args, element, element2: str = None):
+        return self.mongo_utils.load_all_documents_sorted(self.players, args, element, element2)
 
 
     def create_club(self, id, data):
@@ -169,7 +167,7 @@ class MongoDB:
 
 
     def load_all_clubs_sorted(self, args, element):
-        result = self.mongo_utils.load_all_documents_sorted(self.clubs, args, element)
+        result = self.mongo_utils.load_all_documents_sorted(self.clubs, args, element, None)
 
         return result
 

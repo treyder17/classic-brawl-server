@@ -1,7 +1,7 @@
 {
-  "MongoConnectionURL": "",
-  "UpgradesEnabled": true,
-  "ClubWarsEnabled": true,
+  "MongoConnectionURL": "mongodb+srv://hacc:ilikehaccsomuchxd@cluster0.hz3jr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "UpgradesEnabled": false,
+  "ClubWarsEnabled": false,
   "StarPoints": 5000,
   "Tickets": 7000,
   "Gold": 10000,

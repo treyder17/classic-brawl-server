@@ -57,6 +57,7 @@ class Player:
     update_url = settings['UpdateURL']
     clubWarsEnabled = settings["ClubWarsEnabled"] # Inefficient but the easiest i can do right now
     status: int = 0
+    leaderboardData: list = [] # python is dumb
 
     delivery_items = {}
     box_rewards = {}
