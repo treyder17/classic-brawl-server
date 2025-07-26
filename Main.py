@@ -34,6 +34,7 @@ class Main:
             print("Some modules are missing, please run pip install -r requirements.txt on your terminal to install them.")
 
         except Exception as e:
+            print(f"Encountered exception: {e}") 
             if self.useUpdater:
                 self.crashCount += 1
 
