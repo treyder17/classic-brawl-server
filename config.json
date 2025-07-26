@@ -1,5 +1,5 @@
 {
-  "MongoConnectionURL": "mongodb+srv://hacc:ilikehaccsomuchxd@cluster0.hz3jr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "MongoConnectionURL": "",
   "UpgradesEnabled": false,
   "ClubWarsEnabled": false,
   "StarPoints": 5000,
