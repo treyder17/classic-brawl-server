@@ -1,4 +1,5 @@
 import json
+import os
 import socket
 from Utils.Helpers import Helpers
 from DataBase.MongoDB import MongoDB
@@ -15,7 +16,8 @@ class Server:
 
     def __init__(self, ip: str, port: int):
         self.config = json.loads(open('config.json', 'r').read())
-        self.db = MongoDB(self.config['MongoConnectionURL'])
+        mongo_url = os.environ.get("MONGODB_URL") or self.config['MongoConnectionURL']
+        self.db = MongoDB(mongo_url)
         self.server = socket.socket()
         self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) # You can start server with the same address
         self.port = port
