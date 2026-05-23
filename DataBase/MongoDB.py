@@ -1,5 +1,6 @@
 import sys
 import pymongo
+import certifi
 import datetime
 import ssl
 from DataBase.MongoUtils import MongoUtils
@@ -13,7 +14,7 @@ class MongoDB:
     def __init__(self, conn_str):
         self.player = Player
         
-        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000)
+        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000, tlsCAFile=certifi.where())
         
         try:
             print(f"{Helpers.cyan}[DEBUG] Connecting to Mongo DataBase...")

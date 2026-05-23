@@ -3,3 +3,4 @@ pymongo
 dnspython
 requests~=2.32.3
 Brotli~=1.1.0
+certifi
