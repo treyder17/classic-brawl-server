@@ -1,5 +1,6 @@
 from Core.Networking.Server import Server
-import json  # meh
+import json
+import os
 
 from Utils.Updater import Updater
 
@@ -8,6 +9,8 @@ class Main:
     def __init__(self):
         self.crashCount: int = 0
         self.configuration = json.loads(open("config.json", "r").read())
+        if os.environ.get("MONGODB_URL"):
+            self.configuration["MongoConnectionURL"] = os.environ["MONGODB_URL"]
         self.useUpdater = self.configuration.get("UpgradesEnabled", False)
         self.main()
         self.updater: Updater = None
