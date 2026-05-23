@@ -13,19 +13,10 @@ class MongoDB:
     def __init__(self, conn_str):
         self.player = Player
         
-        # Globaler Fix für fehlerhafte Zertifikatsketten im Container
-        try:
-            ssl._create_default_https_context = ssl._create_unverified_context
-        except AttributeError:
-            pass
-
-        # Bombensichere Verbindung ohne TLS/SSL-Blockaden
         self.client = pymongo.MongoClient(
-            conn_str, 
-            serverSelectionTimeoutMS=5000, 
-            tls=True, 
-            tlsAllowInvalidCertificates=True,
-            tlsInsecure=True
+            conn_str,
+            serverSelectionTimeoutMS=5000,
+            tlsAllowInvalidCertificates=True
         )
         
         try:
