@@ -1,6 +1,7 @@
 import sys
 import pymongo
 import datetime
+import ssl
 from DataBase.MongoUtils import MongoUtils
 from Logic.Player import Player
 import json
@@ -11,10 +12,26 @@ from Utils.Helpers import Helpers
 class MongoDB:
     def __init__(self, conn_str):
         self.player = Player
-        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000, tls=True, tlsAllowInvalidCertificates=True)
+        
+        # Globaler Fix für fehlerhafte Zertifikatsketten im Container
+        try:
+            ssl._create_default_https_context = ssl._create_unverified_context
+        except AttributeError:
+            pass
+
+        # Bombensichere Verbindung ohne TLS/SSL-Blockaden
+        self.client = pymongo.MongoClient(
+            conn_str, 
+            serverSelectionTimeoutMS=5000, 
+            tls=True, 
+            tlsAllowInvalidCertificates=True,
+            tlsInsecure=True
+        )
+        
         try:
             print(f"{Helpers.cyan}[DEBUG] Connecting to Mongo DataBase...")
             self.client.server_info()
+            print(f"{Helpers.green}[DEBUG] Successfully connected to MongoDB!")
         except Exception as e:
             print(f"{Helpers.red}[ERROR] Unable to connect to Mongo server! Error: {e}")
             sys.exit()
