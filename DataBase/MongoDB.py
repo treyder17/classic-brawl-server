@@ -13,11 +13,7 @@ class MongoDB:
     def __init__(self, conn_str):
         self.player = Player
         
-        self.client = pymongo.MongoClient(
-            conn_str,
-            serverSelectionTimeoutMS=5000,
-            tlsAllowInvalidCertificates=True
-        )
+        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000)
         
         try:
             print(f"{Helpers.cyan}[DEBUG] Connecting to Mongo DataBase...")
