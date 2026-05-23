@@ -11,7 +11,7 @@ from Utils.Helpers import Helpers
 class MongoDB:
     def __init__(self, conn_str):
         self.player = Player
-        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS = 5000)
+        self.client = pymongo.MongoClient(conn_str, serverSelectionTimeoutMS=5000, tls=True, tlsAllowInvalidCertificates=True)
         try:
             print(f"{Helpers.cyan}[DEBUG] Connecting to Mongo DataBase...")
             self.client.server_info()
